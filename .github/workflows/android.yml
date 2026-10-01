@@ -13,6 +13,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Extract native Android project
+        run: |
+          mkdir build-src
+          unzip -q "perimetru-guard-android-native (1).zip" -d build-src
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -20,15 +25,15 @@ jobs:
           java-version: '21'
 
       - name: Make gradlew executable
-        run: chmod +x android/gradlew
+        run: chmod +x build-src/android/gradlew
 
       - name: Build APK
-        working-directory: android
+        working-directory: build-src/android
         run: ./gradlew assembleDebug --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: perimetru-guard-debug-apk
-          path: android/app/build/outputs/apk/debug/*.apk
+          path: build-src/android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
