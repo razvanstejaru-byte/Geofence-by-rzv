@@ -24,17 +24,17 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: build-src/android 
-        working-directory: build-src/android
-        run: ​chmod +x gradlew
+      - name: Make gradlew executable
+        working-directory: build-src/perimetru-guard-android-native/android
+        run: chmod +x gradlew
 
       - name: Build APK
-        working-directory: build-src/android
+        working-directory: build-src/perimetru-guard-android-native/android
         run: ./gradlew assembleDebug --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: perimetru-guard-debug-apk
-          path: build-src/android/app/build/outputs/apk/debug/*.apk
+          path: build-src/perimetru-guard-android-native/android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
