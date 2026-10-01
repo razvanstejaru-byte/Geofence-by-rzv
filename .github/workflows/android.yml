@@ -24,8 +24,8 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Make gradlew executable
-        run: ​cd build-src/android && chmod +x gradlew
+      - name: ​working-directory: build-src/android 
+        run: ​chmod +x gradlew
 
       - name: Build APK
         working-directory: build-src/android
