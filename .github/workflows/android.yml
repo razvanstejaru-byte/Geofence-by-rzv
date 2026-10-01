@@ -25,7 +25,7 @@ jobs:
           java-version: '21'
 
       - name: Make gradlew executable
-        run: chmod +x build-src/android/gradlew
+        run: ​cd build-src/android && chmod +x gradlew
 
       - name: Build APK
         working-directory: build-src/android
